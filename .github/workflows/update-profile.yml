@@ -1,7 +1,7 @@
 # Visit https://github.com/lowlighter/metrics#-documentation for full reference
 name: Metrics
 on:
-  # Schedule updates (each hour)
+  # Schedule updates (each day at 6am)
   schedule: [{cron: "0 6 * * *"}]
   # Lines below let you run workflow manually and on each commit
   workflow_dispatch:
@@ -14,14 +14,6 @@ jobs:
     steps:
       - uses: lowlighter/metrics@latest
         with:
-          # Your GitHub token
-          # The following scopes are required:
-          #  - public_access (default scope)
-          # The following additional scopes may be required:
-          #  - read:org      (for organization related metrics)
-          #  - read:user     (for user related data)
-          #  - read:packages (for some packages related data)
-          #  - repo          (optional, if you want to include private repositories)
           token: ${{ secrets.USER_TOKEN }}
 
           # Options
@@ -69,3 +61,5 @@ jobs:
           plugin_topics_sort: stars
           repositories_batch: 100
           repositories_forks: yes
+          extras_css: |
+            h2:not(:first-child) { display: none !important; }
